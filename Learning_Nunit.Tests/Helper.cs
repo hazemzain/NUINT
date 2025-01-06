@@ -1,11 +1,16 @@
 ﻿using ExcelDataReader;
+using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Learing_Nunit
+namespace Learning_Nunit.Tests
 {
-    internal class Program
+    public class Helper
     {
-        static void Main(string[] args)
+        public static IEnumerable<TestCaseData> GetTestDataFromExcel()
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             string filePath = "D:\\Learning_Test_Project\\Learing_Nunit\\Learning_Nunit.Tests\\testdata.xlsx";
@@ -21,8 +26,9 @@ namespace Learing_Nunit
                 int secondValue = int.Parse(reader.GetValue(1)?.ToString() ?? "0");
                 int expectedOutput = int.Parse(reader.GetValue(2)?.ToString() ?? "0");
 
-                //yield return new TestCaseData(firstValue, secondValue, expectedOutput);
+                yield return new TestCaseData(firstValue, secondValue, expectedOutput);
             }
         }
+
     }
 }
