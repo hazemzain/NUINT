@@ -14,7 +14,7 @@ namespace Learning_Nunit.Tests.Calculator_Modules_UnitTesting
     [TestFixture]
     [AllureNUnit]
 
-    public class Calculator_MultiplyModule_Tests
+    public class Calculator_DivideModule_Tests
     {
         private static StreamWriter? _logFileWriter;
         private Logger? _logger;
@@ -28,6 +28,7 @@ namespace Learning_Nunit.Tests.Calculator_Modules_UnitTesting
 
             _logFileWriter.WriteLine($"[{DateTime.Now}] Test suite started.");
         }
+
         [SetUp]
         public void TestSetUp()
         {
@@ -35,68 +36,37 @@ namespace Learning_Nunit.Tests.Calculator_Modules_UnitTesting
             _logFileWriter?.WriteLine($"[{DateTime.Now}] Test started: {TestContext.CurrentContext.Test.Name}");
         }
 
+        [Test]
+        public void Divide_TwoPositiveNumbers_ReturnCorrectValue()
+        {
+            var cal = new Calculator();
+            int result = cal.Divide_Number(10, 2);
+            Assert.That(result, Is.EqualTo(5));
+        }
+        [Test]
+        public void Divide_DivideByZero_ThrowsDivideByZeroException()
+        {
+            var cal = new Calculator();
 
-
-        /**
-         * here implementation  testcases for this module
-         */
-        [Test]
-        public void Multiply_TwoPositiveNumbers_ReturnCorrectValue()
-        {
-            var cal = new Calculator();
-            int result = cal.Multiply_Number(4, 5);
-            Assert.That(result, Is.EqualTo(20));
-        }
-        [Test]
-        public void Multiply_ZeroAndNumber_ReturnZero()
-        {
-            var cal = new Calculator();
-            int result = cal.Multiply_Number(0, 100);
-            Assert.That(result, Is.EqualTo(0));
-        }
-        [Test]
-        public void Multiply_TwoNegativeNumbers_ReturnPositiveValue()
-        {
-            var cal = new Calculator();
-            int result = cal.Multiply_Number(-4, -5);
-            Assert.That(result, Is.EqualTo(20)); 
-        }
-        [Test]
-        public void Multiply_LargeNumbers_ReturnCorrectResult()
-        {
-            var cal = new Calculator();
-            int result = cal.Multiply_Number(100000, 1000);
-            Assert.That(result, Is.EqualTo(100000000)); 
-        }
-        [Test]
-        public void Multiply_WithIntMaxValue_ReturnCorrectResult()
-        {
-            var cal = new Calculator();
-            int result = cal.Multiply_Number(int.MaxValue, 2);
-            Assert.That(result, Is.EqualTo(4294967294)); 
+            
+            var ex = Assert.Throws<DivideByZeroException>(() => cal.Divide_Number(10, 0));
+            Assert.That(ex.Message, Is.EqualTo("Cannot divide by zero."));
         }
 
         [Test]
-        public void Multiply_WithIntMinValue_ReturnCorrectResult()
+        public void Divide_PositiveByNegativeNumber_ReturnsCorrectResult()
         {
             var cal = new Calculator();
-            int result = cal.Multiply_Number(int.MinValue, 2);
-            Assert.That(result, Is.EqualTo(-4294967294)); 
+            int result = cal.Divide_Number(10, -2);
+            Assert.That(result, Is.EqualTo(-5));
         }
 
         [Test]
-        public void Multiply_LargeNegativeAndPositiveNumbers_ReturnCorrectValue()
+        public void Divide_ByOne_ReturnsSameNumber()
         {
             var cal = new Calculator();
-            int result = cal.Multiply_Number(-1000000, 500);
-            Assert.That(result, Is.EqualTo(-500000000)); 
-        }
-        [Test]
-        public void Multiply_TwoIdenticalNumbers_ReturnCorrectResult()
-        {
-            var cal = new Calculator();
-            int result = cal.Multiply_Number(7, 7);
-            Assert.That(result, Is.EqualTo(49)); // 7 * 7 = 49
+            int result = cal.Divide_Number(10, 1);
+            Assert.That(result, Is.EqualTo(10));
         }
 
 

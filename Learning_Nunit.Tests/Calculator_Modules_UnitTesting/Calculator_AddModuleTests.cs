@@ -1,5 +1,6 @@
 ﻿using ExcelDataReader;
 using Learing_Nunit;
+using NUnit.Allure.Core;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 //using NUnit.Framework;
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 namespace Learning_Nunit.Tests.Calculator_Modules_UnitTesting
 {
     [TestFixture]
+    [AllureNUnit]
     public class CalculatorTests
     {
 
@@ -23,7 +25,7 @@ namespace Learning_Nunit.Tests.Calculator_Modules_UnitTesting
         [OneTimeSetUp]
         public void GlobalSetUp()
         {
-            _logFilePath = "D:\\Learning_Test_Project\\Learing_Nunit\\Learning_Nunit.Tests\\LOGS\\TEST.txt";//Path.Combine(TestContext.CurrentContext.WorkDirectory, "TEST.txt");
+            _logFilePath = "D:\\Learning_Test_Project\\Learing_Nunit\\Learning_Nunit.Tests\\LOGS\\TEST.txt";
             _logFileWriter = new StreamWriter(_logFilePath, append: true) { AutoFlush = true };
 
             _logFileWriter.WriteLine($"[{DateTime.Now}] Test suite started.");
